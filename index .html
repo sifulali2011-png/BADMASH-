@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Headshot Control Panel</title>
+<style>
+body {
+  background:#10121b;
+  color:white;
+  font-family:Arial;
+  text-align:center;
+  padding:20px;
+}
+.panel {
+  max-width:400px;
+  margin:auto;
+  background:#202536;
+  padding:22px;
+  border-radius:16px;
+}
+button {
+  padding:12px 18px;
+  margin:6px;
+  border:0;
+  border-radius:8px;
+  background:#ff5722;
+  color:white;
+  font-weight:bold;
+}
+.status {color:#00e676}
+</style>
+</head>
+<body>
+<div class="panel">
+<h2>🎯 HEADSHOT CONTROL</h2>
+
+<h3>Custom Mode</h3>
+<button onclick="mode('1v1')">1v1</button>
+<button onclick="mode('1v2')">1v2</button>
+<button onclick="mode('1v3')">1v3</button>
+<button onclick="mode('1v4')">1v4</button>
+
+<h3 id="mode">Mode: 1v1</h3>
+
+<h3>Headshot Display</h3>
+<button onclick="toggle('head')">Headshot ON/OFF</button>
+<p id="head" class="status">ON</p>
+
+<h3>Location Display</h3>
+<button onclick="toggle('location')">Location ON/OFF</button>
+<p id="location" class="status">ON</p>
+
+<div id="aim">🎯 HEADSHOT TRAINING ON</div>
+</div>
+
+<script>
+let settings = {
+  head: true,
+  location: true
+};
+
+function mode(value) {
+  document.getElementById('mode').innerText =
+    'Mode: ' + value;
+}
+
+function toggle(key) {
+  settings[key] = !settings[key];
+
+  document.getElementById(key).innerText =
+    settings[key] ? 'ON' : 'OFF';
+
+  document.getElementById(key).className =
+    settings[key] ? 'status' : '';
+
+  update();
+}
+
+function update() {
+  document.getElementById('aim').innerText =
+    settings.head
+      ? '🎯 HEADSHOT TRAINING ON'
+      : 'HEADSHOT DISPLAY OFF';
+
+  if (!settings.location) {
+    document.getElementById('aim').innerText +=
+      ' | LOCATION HIDDEN';
+  }
+}
+</script>
+</body>
+</html>
